@@ -5,6 +5,7 @@ import com.schedule.entity.Schedule;
 import com.schedule.entity.User;
 import com.schedule.repository.ScheduleRepository;
 import com.schedule.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,15 @@ public class ScheduleService {
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
 
         scheduleRepository.delete(findSchedule);
+    }
+
+    @Transactional
+    public ScheduleResponseDto updateSchedule(Long id, String title, String contents) {
+
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+        findSchedule.updateTitle(title);
+        findSchedule.updateContents(contents);
+
+        return null;
     }
 }
