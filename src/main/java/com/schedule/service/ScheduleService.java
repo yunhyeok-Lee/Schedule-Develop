@@ -63,6 +63,6 @@ public class ScheduleService {
         findSchedule.updateTitle(title);
         findSchedule.updateContents(contents);
 
-        return null;
+        return ScheduleResponseDto.toDto(findSchedule);
     }
 }
