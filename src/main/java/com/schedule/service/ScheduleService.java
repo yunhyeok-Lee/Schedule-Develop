@@ -23,7 +23,7 @@ public class ScheduleService {
 
     public ScheduleResponseDto save(String title, String contents, String username) {
 
-        User findUser = userRepository.findUsersnameOrElseThrow(username);
+        User findUser = userRepository.findUserByUsersnameOrElseThrow(username);
 
         Schedule schedule = new Schedule(title, contents);
         schedule.setUser(findUser);

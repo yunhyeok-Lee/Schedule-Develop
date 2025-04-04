@@ -1,5 +1,6 @@
 package com.schedule.service;
 
+import com.schedule.dto.CreateUserRequestDto;
 import com.schedule.dto.SingUpResponseDto;
 import com.schedule.dto.UserResponseDto;
 import com.schedule.entity.User;
@@ -19,14 +20,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
-//
-//    public UserResponseDto save(String username, String email) {
-//
-//        User user = new User(username, email);
-//
-//
-//        return null;
-//    }
+
+    public CreateUserRequestDto save(String username, String email) {
+
+        User user = new User(username, email);
+        User createdSavedUser = userRepository.save(user);
+
+        return new CreateUserRequestDto(createdSavedUser.getUsername(), createdSavedUser.getEmail());
+    }
 
 
     public SingUpResponseDto signUp(String username, String email,String password) {
@@ -47,7 +48,7 @@ public class UserService {
         }
 
         User findUser = optionalUser.get();
-        return new UserResponseDto(findUser.getUsername(),findUser.getEmail());
+        return new UserResponseDto(findUser.getId(), findUser.getUsername(),findUser.getEmail());
     }
     @Transactional
     public void userUpdate(Long id, String username, String email) {
@@ -59,5 +60,12 @@ public class UserService {
         findUser.updateEmail(email);
 
 
+    }
+
+    public void delete(Long id) {
+
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        userRepository.delete(findUser);
     }
 }

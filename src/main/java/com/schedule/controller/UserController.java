@@ -15,14 +15,14 @@ public class UserController {
 
     private final UserService userService;
 
-//    @PostMapping
-//    public ResponseEntity<UserResponseDto> save(@RequestBody CreateUserRequestDto createUserRequestDto){
-//
-//        UserResponseDto userResponseDto = userService.save(createUserRequestDto.getUsername(), createUserRequestDto.getEmail());
-//
-//        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
-//
-//    }
+    @PostMapping
+    public ResponseEntity<CreateUserRequestDto> save(@RequestBody CreateUserRequestDto createUserRequestDto){
+
+        CreateUserRequestDto userResponseDto = userService.save(createUserRequestDto.getUsername(), createUserRequestDto.getEmail());
+
+        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
+
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<SingUpResponseDto> singUp(@RequestBody SingUpRequestDto singUpRequestDto){
@@ -46,6 +46,13 @@ public class UserController {
 
 
         userService.userUpdate(id,userUpdateRequestDto.getUsername(),userUpdateRequestDto.getEmail());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        userService.delete(id);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
