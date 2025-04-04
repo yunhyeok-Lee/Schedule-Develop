@@ -1,10 +1,7 @@
 package com.schedule.controller;
 
 
-import com.schedule.dto.CreateUserRequestDto;
-import com.schedule.dto.SingUpRequestDto;
-import com.schedule.dto.SingUpResponseDto;
-import com.schedule.dto.UserResponseDto;
+import com.schedule.dto.*;
 import com.schedule.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -42,6 +39,14 @@ public class UserController {
         UserResponseDto userResponseDto = userService.findById(id);
 
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> userUpdate(@PathVariable Long id, @RequestBody UserUpdateRequestDto userUpdateRequestDto){
+
+
+        userService.userUpdate(id,userUpdateRequestDto.getUsername(),userUpdateRequestDto.getEmail());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

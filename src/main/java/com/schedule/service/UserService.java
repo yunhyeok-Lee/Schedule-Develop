@@ -5,6 +5,7 @@ import com.schedule.dto.UserResponseDto;
 import com.schedule.entity.User;
 import com.schedule.repository.ScheduleRepository;
 import com.schedule.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,16 @@ public class UserService {
 
         User findUser = optionalUser.get();
         return new UserResponseDto(findUser.getUsername(),findUser.getEmail());
+    }
+    @Transactional
+    public void userUpdate(Long id, String username, String email) {
+
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        findUser.updateUsername(username);
+
+        findUser.updateEmail(email);
+
+
     }
 }
