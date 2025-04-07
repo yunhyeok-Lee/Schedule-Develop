@@ -37,6 +37,7 @@ public class ScheduleController {
         // scheduleResponseDtoList로 반환하고 OK 를 반환
     }
 
+
     /**
      * @PathVariable
      *  - 경로 변수를 표시하기 위해 메서드에 매개변수에 사용
