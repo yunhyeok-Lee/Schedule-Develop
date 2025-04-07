@@ -15,14 +15,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // Lombok으로 스프링에서 의존성 주입의 방법중 하나 , 생성자 주입 없이 자동으로 설정해주는 어노테이션
 public class UserService {
 
     private final UserRepository userRepository;
+    // userRepository 를 private final 형태로 선언
     private final ScheduleRepository scheduleRepository;
-
+    // scheduleRepository를 private final 형태로 선언
     public CreateUserRequestDto save(String username, String email) {
-
+        // Dto 형태로 username , email를 저장
         User user = new User(username, email);
         User createdSavedUser = userRepository.save(user);
 

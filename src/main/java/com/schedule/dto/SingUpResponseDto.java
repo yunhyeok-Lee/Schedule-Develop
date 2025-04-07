@@ -10,7 +10,8 @@ public class SingUpResponseDto {
     private final String username;
 
     private final String email;
-
+    //  각 변수를 Long, String 타입으로 선언
+    // private 와 final 로 선언
 
     public SingUpResponseDto(Long id, String username, String email) {
         this.id = id;
@@ -19,4 +20,5 @@ public class SingUpResponseDto {
 
 
     }
+    // 생성자 생성
 }
