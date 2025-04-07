@@ -61,20 +61,21 @@ public class UserService {
      * 즉, 모두 성공하거나, 전부 실패하게 만듬.
      */
     public void userUpdate(Long id, String username, String email) {
-
+        // userUpdate 메서드를 호출 할때, id, username, email값을 넘겨주면 메서드 안에서 사용
         User findUser = userRepository.findByIdOrElseThrow(id);
-
+        //id 값을 userRepository.findByIdOrElseThrow 메서드를 실행할때 사용한다.
         findUser.updateUsername(username);
-
+        // username 값을 findUser.updateUsername 메서드를 실행할 때 사용
         findUser.updateEmail(email);
-
+        // email 값을 findUser.updateUsername 메서드를 사용할 때 사용
 
     }
 
     public void delete(Long id) {
         // long id 값 삭제
         User findUser = userRepository.findByIdOrElseThrow(id);
-
+        // id 값을 userRepository.findByIdOrElseThrow 메서드를 실행할때 사용
         userRepository.delete(findUser);
+        // 찾은 findUser 값을 삭제한다.
     }
 }
